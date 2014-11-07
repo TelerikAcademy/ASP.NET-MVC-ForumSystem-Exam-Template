@@ -3,9 +3,39 @@
     ViewBag.Title = "Home Page";
 }
 
-<div>
+<div class="container">
     @foreach (var post in Model)
     {
-        <p>@post.Title</p>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="well text-center">
+                    <div class="row">0</div>
+                    <div class="row">answers</div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="well text-center">
+                    <div class="row">0</div>
+                    <div class="row">answers</div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <h4>
+                        <a href="/123/asd-asd-asd">@post.Title</a>
+                    </h4>
+                </div>
+                <div class="row">
+                    <p>asked 35 minutes ago in Kids Academy - програмиране за деца by a.dimitrov04 (40 points)</p>
+                </div>
+                <div class="row">
+                    <span class="label label-default">kids</span>
+                    <span class="label label-default">academy</span>
+                    <span class="label label-default">blabla</span>
+                    <span class="label label-default">kadasdaasdasdasdids</span>
+                </div>
+            </div>
+        </div>
+        <hr />
     }
 </div>
