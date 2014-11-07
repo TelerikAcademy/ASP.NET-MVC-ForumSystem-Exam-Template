@@ -45,6 +45,8 @@
     <Compile Include="Models\IDeletableEntity.cs" />
     <Compile Include="Models\IOrderable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IDeletableEntityRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
