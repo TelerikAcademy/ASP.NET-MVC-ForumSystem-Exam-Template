@@ -13,12 +13,6 @@ namespace ForumSystem.Web.Controllers
     {
         private IRepository<Post> posts;
 
-        // Poor man's DI
-        public HomeController()
-            : this(new GenericRepository<Post>(new ApplicationDbContext()))
-        {
-        }
-
         public HomeController(IRepository<Post> posts)
         {
             this.posts = posts;
