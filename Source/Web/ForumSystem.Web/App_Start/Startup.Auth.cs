@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ForumSystem.Web.Models;
+using ForumSystem.Data;
+using ForumSystem.Data.Models;
 
 namespace ForumSystem.Web
 {

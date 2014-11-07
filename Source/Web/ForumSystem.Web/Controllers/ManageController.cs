@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ForumSystem.Web.Models;
+using ForumSystem.Data.Models;
 
 namespace ForumSystem.Web.Controllers
 {
