@@ -46,12 +46,10 @@
 
         private static void LoadCustomMappings(IEnumerable<Type> types)
         {
-            var maps = (from t in types
-                        from i in t.GetInterfaces()
-                        where typeof(IHaveCustomMappings).IsAssignableFrom(t) &&
-                              !t.IsAbstract &&
-                              !t.IsInterface
-                        select (IHaveCustomMappings)Activator.CreateInstance(t));
+            var maps = from t in types
+                       from i in t.GetInterfaces()
+                       where typeof(IHaveCustomMappings).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface
+                       select (IHaveCustomMappings)Activator.CreateInstance(t);
 
             foreach (var map in maps)
             {

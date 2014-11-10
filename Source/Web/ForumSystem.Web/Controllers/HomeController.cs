@@ -10,7 +10,7 @@
 
     public class HomeController : Controller
     {
-        private IRepository<Post> posts;
+        private readonly IRepository<Post> posts;
 
         public HomeController(IRepository<Post> posts)
         {
@@ -19,9 +19,9 @@
 
         public ActionResult Index()
         {
-            var posts = this.posts.All().Project().To<IndexBlogPostViewModel>();
+            var model = this.posts.All().Project().To<IndexBlogPostViewModel>();
 
-            return View(posts);
+            return this.View(model);
         }
     }
 }
