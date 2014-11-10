@@ -1,18 +1,19 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(ForumSystem.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(ForumSystem.Web.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(ForumSystem.Web.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(ForumSystem.Web.NinjectWebCommon), "Stop")]
 
-namespace ForumSystem.Web.App_Start
+namespace ForumSystem.Web
 {
     using System;
+    using System.Data.Entity;
     using System.Web;
+
+    using ForumSystem.Data;
+    using ForumSystem.Data.Common.Repository;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
     using Ninject.Web.Common;
-    using System.Data.Entity;
-    using ForumSystem.Data;
-    using ForumSystem.Data.Common.Repository;
 
     public static class NinjectWebCommon 
     {

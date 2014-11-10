@@ -1,12 +1,15 @@
-﻿using ForumSystem.Data.Common.Models;
-using ForumSystem.Data.Migrations;
-using ForumSystem.Data.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Data.Entity;
-using System.Linq;
-namespace ForumSystem.Data
+﻿namespace ForumSystem.Data
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+
+    using ForumSystem.Data.Common.Models;
+    using ForumSystem.Data.Migrations;
+    using ForumSystem.Data.Models;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -15,14 +18,14 @@ namespace ForumSystem.Data
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
+        public IDbSet<Tag> Tags { get; set; }
+
+        public IDbSet<Post> Posts { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-
-        public IDbSet<Tag> Tags { get; set; }
-
-        public IDbSet<Post> Posts { get; set; }
 
         public override int SaveChanges()
         {
