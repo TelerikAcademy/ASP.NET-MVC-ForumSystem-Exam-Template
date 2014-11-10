@@ -9,7 +9,7 @@
     using System.Web.Mvc;
 
     using ForumSystem.Data.Models;
-    using ForumSystem.Web.Models;
+    using ForumSystem.Web.ViewModels.Account;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;

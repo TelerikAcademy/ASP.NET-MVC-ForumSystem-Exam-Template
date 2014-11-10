@@ -1,4 +1,4 @@
-﻿namespace ForumSystem.Web.Models
+﻿namespace ForumSystem.Web.ViewModels.Manage
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

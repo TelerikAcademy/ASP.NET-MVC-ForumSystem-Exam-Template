@@ -10,7 +10,6 @@
 
     using ForumSystem.Data;
     using ForumSystem.Data.Models;
-    using ForumSystem.Web.Models;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
