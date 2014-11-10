@@ -16,6 +16,11 @@
     [Authorize]
     public class ManageController : Controller
     {
+        // Used for XSRF protection when adding external logins
+        private const string XsrfKey = "XsrfId";
+
+        private ApplicationUserManager userManager;
+
         public ManageController()
         {
         }
@@ -25,7 +30,16 @@
             this.UserManager = userManager;
         }
 
-        private ApplicationUserManager userManager;
+        public enum ManageMessageId
+        {
+            AddPhoneSuccess,
+            ChangePasswordSuccess,
+            SetTwoFactorSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+            RemovePhoneSuccess,
+            Error
+        }
 
         public ApplicationUserManager UserManager
         {
@@ -37,6 +51,14 @@
             private set
             {
                 this.userManager = value;
+            }
+        }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
             }
         }
 
@@ -315,17 +337,7 @@
         }
 
 #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
+        
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             this.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie, DefaultAuthenticationTypes.TwoFactorCookie);
@@ -361,18 +373,6 @@
 
             return false;
         }
-
-        public enum ManageMessageId
-        {
-            AddPhoneSuccess,
-            ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
-            Error
-        }
-
 #endregion
     }
 }

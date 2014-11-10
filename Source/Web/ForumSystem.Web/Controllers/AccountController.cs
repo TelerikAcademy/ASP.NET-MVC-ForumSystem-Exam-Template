@@ -15,7 +15,12 @@
     [Authorize]
     public class AccountController : Controller
     {
+        // Used for XSRF protection when adding external logins
+        private const string XsrfKey = "XsrfId";
+
         private ApplicationUserManager userManager;
+
+        private ApplicationSignInManager signInManager;
 
         public AccountController()
         {
@@ -40,16 +45,6 @@
             }
         }
 
-        // GET: /Account/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return this.View();
-        }
-
-        private ApplicationSignInManager signInManager;
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -61,6 +56,22 @@
             {
                 this.signInManager = value;
             }
+        }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return this.View();
         }
 
         // POST: /Account/Login
@@ -256,6 +267,7 @@
                 // Don't reveal that the user does not exist
                 return this.RedirectToAction("ResetPasswordConfirmation", "Account");
             }
+
             var result = await this.UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
@@ -292,6 +304,7 @@
             {
                 return this.View("Error");
             }
+
             var userFactors = await this.UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return this.View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
@@ -404,17 +417,6 @@
         }
 
         #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -429,6 +431,7 @@
             {
                 return this.Redirect(returnUrl);
             }
+
             return this.RedirectToAction("Index", "Home");
         }
 
@@ -459,6 +462,7 @@
                 {
                     properties.Dictionary[AccountController.XsrfKey] = this.UserId;
                 }
+
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, this.LoginProvider);
             }
         }
