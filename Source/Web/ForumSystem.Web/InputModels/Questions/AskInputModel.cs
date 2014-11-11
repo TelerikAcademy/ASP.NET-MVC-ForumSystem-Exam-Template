@@ -21,6 +21,7 @@ namespace ForumSystem.Web.InputModels.Questions
         public string Content { get; set; }
 
         // TODO: Create custon validation for the tags
+        [Required]
         [Display(Name = "Tags")]
         public string Tags { get; set; }
     }

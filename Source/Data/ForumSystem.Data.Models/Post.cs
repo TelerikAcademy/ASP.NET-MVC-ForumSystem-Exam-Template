@@ -12,7 +12,10 @@
         [MaxLength(100)]
         public string Title { get; set; }
 
-        //// TODO: Author, 
+        public string AuthorId { get; set; }
+
+        public virtual ApplicationUser Author { get; set; }
+ 
         public string Content { get; set; }
 
         public bool IsDeleted { get; set; }
