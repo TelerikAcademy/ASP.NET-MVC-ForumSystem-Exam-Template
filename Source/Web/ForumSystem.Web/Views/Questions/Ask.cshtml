@@ -4,14 +4,31 @@
 }
 
 <h1>@ViewBag.Title</h1>
-@using (Html.BeginForm("Ask", "Questions", FormMethod.Post))
+@using (Html.BeginForm("Ask", "Questions", FormMethod.Post, new { @class = "form-horizontal" }))
 {
-    @Html.LabelFor(model => model.Title)
-    @Html.EditorFor(model => model.Title)
+    @Html.AntiForgeryToken()
 
-    @Html.LabelFor(model => model.Content)
-    @Html.EditorFor(model => model.Content)
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, new { @class = "col-md-1 control-label" })
+        <div class="col-md-11">
+            @Html.EditorFor(model => model.Title, new { placeholder = "Title123" })
+        </div>
+    </div>
 
-    @Html.LabelFor(model => model.Tags)
-    @Html.EditorFor(model => model.Tags)
+    <div class="form-group">
+        @Html.EditorFor(model => model.Content)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Tags, new { @class = "col-md-1 control-label" })
+        <div class="col-md-11">
+            @Html.EditorFor(model => model.Tags, new { placeholder = "at least one tag such as (ruby-on-rails-3 python c), max 5 tags separated by comma" })
+        </div>
+    </div>
+    
+    <div class="form-group text-center">
+        <input type="submit" value="Ask question" class="btn btn-primary btn-lg" />
+    </div>
 }
