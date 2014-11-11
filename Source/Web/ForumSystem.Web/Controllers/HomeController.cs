@@ -10,15 +10,18 @@
 
     public class HomeController : Controller
     {
-        private readonly IRepository<Post> posts;
+        private readonly IDeletableEntityRepository<Post> posts;
 
-        public HomeController(IRepository<Post> posts)
+        public HomeController(IDeletableEntityRepository<Post> posts)
         {
             this.posts = posts;
         }
 
         public ActionResult Index()
         {
+            this.posts.ActualDelete(this.posts.GetById(3));
+            this.posts.SaveChanges();
+
             var model = this.posts.All().Project().To<IndexBlogPostViewModel>();
 
             return this.View(model);

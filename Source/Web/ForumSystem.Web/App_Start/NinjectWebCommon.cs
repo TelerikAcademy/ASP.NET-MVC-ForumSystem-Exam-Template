@@ -14,6 +14,7 @@ namespace ForumSystem.Web
 
     using Ninject;
     using Ninject.Web.Common;
+    using ForumSystem.Data.Models;
 
     public static class NinjectWebCommon 
     {
@@ -67,10 +68,12 @@ namespace ForumSystem.Web
         {
             kernel.Bind<DbContext>().To<ApplicationDbContext>();
 
+            kernel.Bind(typeof(IRepository<Post>)).To(typeof(DeletableEntityRepository<Post>));
+
             kernel.Bind(typeof(IDeletableEntityRepository<>))
                 .To(typeof(DeletableEntityRepository<>));
 
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
-        }        
+        }
     }
 }
