@@ -14,7 +14,8 @@ namespace ForumSystem.Web.InputModels.Questions
 
         [AllowHtml]
         [Display(Name = "Content")]
-        [DataType(DataType.MultilineText)]
+        [DataType("tinymce_full")]
+        [UIHint("tinymce_full")]
         public string Content { get; set; }
 
         [Display(Name = "Tags")]
