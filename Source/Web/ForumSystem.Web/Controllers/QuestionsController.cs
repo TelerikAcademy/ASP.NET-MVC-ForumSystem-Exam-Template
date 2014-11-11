@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ForumSystem.Web.ViewModels.Questions;
+using AutoMapper.QueryableExtensions;
+using ForumSystem.Web.Infrastructure;
 
 namespace ForumSystem.Web.Controllers
 {
@@ -13,15 +16,27 @@ namespace ForumSystem.Web.Controllers
     {
         private readonly IDeletableEntityRepository<Post> posts;
 
-        public QuestionsController(IDeletableEntityRepository<Post> posts)
+        private readonly ISanitizer sanitizer;
+
+        public QuestionsController(IDeletableEntityRepository<Post> posts,
+            ISanitizer sanitizer)
         {
             this.posts = posts;
+            this.sanitizer = sanitizer;
         }
 
         // /questions/26864653/mysql-workbench-crash-on-start-on-windows
         public ActionResult Display(int id, string url, int page = 1)
         {
-            return Content(id + " " + url);
+            var postViewModel = this.posts.All().Where(x => x.Id == id)
+                .Project().To<QuestionDisplayViewModel>().FirstOrDefault();
+
+            if (postViewModel == null)
+            {
+                return this.HttpNotFound("No suck post");
+            }
+
+            return View(postViewModel);
         }
 
         // /questions/tagged/javascript
@@ -45,7 +60,7 @@ namespace ForumSystem.Web.Controllers
                 var post = new Post
                     {
                         Title = input.Title,
-                        Content = input.Content,
+                        Content = sanitizer.Sanitize(input.Content),
                         // TODO: Tags
                         // TODO: Author
                     };
