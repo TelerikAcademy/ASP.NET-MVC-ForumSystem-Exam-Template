@@ -34,7 +34,7 @@ namespace ForumSystem.Web.Controllers
 
             if (postViewModel == null)
             {
-                return this.HttpNotFound("No suck post");
+                return this.HttpNotFound("No such post");
             }
 
             return View(postViewModel);
