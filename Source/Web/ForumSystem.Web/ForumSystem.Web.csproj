@@ -181,16 +181,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\HomeController.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HomeController.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\HomeController.bg.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HomeController.bg.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -246,11 +236,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <EmbeddedResource Include="App_GlobalResources\HomeController.bg.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>HomeController.bg.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -492,12 +477,6 @@
       <Project>{86ce0aea-0f7e-4c82-98c2-e74d778b9fab}</Project>
       <Name>ForumSystem.Web.Infrastructure</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\HomeController.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>HomeController.Designer.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
