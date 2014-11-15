@@ -1,8 +1,8 @@
 ﻿namespace ForumSystem.Web
 {
-    using ForumSystem.Web.Infrastructure.Filters;
-    using System.Web;
     using System.Web.Mvc;
+
+    using ForumSystem.Web.Infrastructure.Filters;
 
     public class FilterConfig
     {

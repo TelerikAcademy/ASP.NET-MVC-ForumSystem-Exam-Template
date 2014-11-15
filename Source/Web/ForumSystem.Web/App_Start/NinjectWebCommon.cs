@@ -9,13 +9,13 @@ namespace ForumSystem.Web
 
     using ForumSystem.Data;
     using ForumSystem.Data.Common.Repository;
+    using ForumSystem.Data.Models;
+    using ForumSystem.Web.Infrastructure;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
     using Ninject.Web.Common;
-    using ForumSystem.Data.Models;
-    using ForumSystem.Web.Infrastructure;
 
     public static class NinjectWebCommon 
     {

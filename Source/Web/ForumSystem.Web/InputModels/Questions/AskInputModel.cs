@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-
-namespace ForumSystem.Web.InputModels.Questions
+﻿namespace ForumSystem.Web.InputModels.Questions
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+
     public class AskInputModel
     {
         [Required]

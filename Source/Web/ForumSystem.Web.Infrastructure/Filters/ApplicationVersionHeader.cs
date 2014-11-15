@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-
-namespace ForumSystem.Web.Infrastructure.Filters
+﻿namespace ForumSystem.Web.Infrastructure.Filters
 {
+    using System.Web.Mvc;
+
     public class ApplicationVersionHeaderFilter : ActionFilterAttribute
     {
         public override void OnActionExecuted(ActionExecutedContext filterContext)

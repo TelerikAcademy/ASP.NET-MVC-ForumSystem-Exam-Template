@@ -1,26 +1,25 @@
-﻿using ForumSystem.Data.Common.Repository;
-using ForumSystem.Data.Models;
-using ForumSystem.Web.InputModels.Questions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using ForumSystem.Web.ViewModels.Questions;
-using AutoMapper.QueryableExtensions;
-using ForumSystem.Web.Infrastructure;
-using Microsoft.AspNet.Identity;
-
-namespace ForumSystem.Web.Controllers
+﻿namespace ForumSystem.Web.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+
+    using AutoMapper.QueryableExtensions;
+
+    using ForumSystem.Data.Common.Repository;
+    using ForumSystem.Data.Models;
+    using ForumSystem.Web.Infrastructure;
+    using ForumSystem.Web.InputModels.Questions;
+    using ForumSystem.Web.ViewModels.Questions;
+
+    using Microsoft.AspNet.Identity;
+
     public class QuestionsController : Controller
     {
         private readonly IDeletableEntityRepository<Post> posts;
 
         private readonly ISanitizer sanitizer;
 
-        public QuestionsController(IDeletableEntityRepository<Post> posts,
-            ISanitizer sanitizer)
+        public QuestionsController(IDeletableEntityRepository<Post> posts, ISanitizer sanitizer)
         {
             this.posts = posts;
             this.sanitizer = sanitizer;
@@ -37,13 +36,13 @@ namespace ForumSystem.Web.Controllers
                 return this.HttpNotFound("No such post");
             }
 
-            return View(postViewModel);
+            return this.View(postViewModel);
         }
 
         // /questions/tagged/javascript
         public ActionResult GetByTag(string tag)
         {
-            return Content(tag);
+            return this.Content(tag);
         }
 
         [HttpGet]
@@ -66,8 +65,9 @@ namespace ForumSystem.Web.Controllers
                 var post = new Post
                     {
                         Title = input.Title,
-                        Content = sanitizer.Sanitize(input.Content),
+                        Content = this.sanitizer.Sanitize(input.Content),
                         AuthorId = userId,
+                        
                         // TODO: Tags
                         // TODO: Author
                     };
