@@ -10,19 +10,19 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
 
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    public class ApplicationUserManager : UserManager<ForumUser>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+        public ApplicationUserManager(IUserStore<ForumUser> store)
             : base(store)
         {
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ForumUser>(context.Get<ForumDbContext>()));
 
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+            manager.UserValidator = new UserValidator<ForumUser>(manager)
                                         {
                                             AllowOnlyAlphanumericUserNames = false,
                                             RequireUniqueEmail = true
@@ -47,10 +47,10 @@
             // You can write your own provider and plug it in here.
             manager.RegisterTwoFactorProvider(
                 "Phone Code",
-                new PhoneNumberTokenProvider<ApplicationUser> { MessageFormat = "Your security code is {0}" });
+                new PhoneNumberTokenProvider<ForumUser> { MessageFormat = "Your security code is {0}" });
             manager.RegisterTwoFactorProvider(
                 "Email Code",
-                new EmailTokenProvider<ApplicationUser>
+                new EmailTokenProvider<ForumUser>
                     {
                         Subject = "Security Code",
                         BodyFormat = "Your security code is {0}"
@@ -61,7 +61,7 @@
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                    new DataProtectorTokenProvider<ForumUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
 
             return manager;

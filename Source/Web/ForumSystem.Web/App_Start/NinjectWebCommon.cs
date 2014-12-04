@@ -17,8 +17,9 @@ namespace ForumSystem.Web
     using Ninject;
     using Ninject.Web.Common;
 
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
+        public static IKernel Kernel { get; private set; }
         private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
 
         /// <summary>
@@ -45,18 +46,18 @@ namespace ForumSystem.Web
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            Kernel = new StandardKernel();
             try
             {
-                kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
-                kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+                Kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
+                Kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-                RegisterServices(kernel);
-                return kernel;
+                RegisterServices(Kernel);
+                return Kernel;
             }
             catch
             {
-                kernel.Dispose();
+                Kernel.Dispose();
                 throw;
             }
         }
@@ -67,7 +68,7 @@ namespace ForumSystem.Web
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<DbContext>().To<ApplicationDbContext>();
+            kernel.Bind<IForumDbContext>().To<ForumDbContext>();
 
             kernel.Bind(typeof(IRepository<Post>)).To(typeof(DeletableEntityRepository<Post>));
 

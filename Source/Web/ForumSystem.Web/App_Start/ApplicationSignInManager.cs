@@ -9,7 +9,7 @@
     using Microsoft.Owin;
     using Microsoft.Owin.Security;
 
-    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
+    public class ApplicationSignInManager : SignInManager<ForumUser, string>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
@@ -21,7 +21,7 @@
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ForumUser user)
         {
             return user.GenerateUserIdentityAsync((ApplicationUserManager)this.UserManager);
         }

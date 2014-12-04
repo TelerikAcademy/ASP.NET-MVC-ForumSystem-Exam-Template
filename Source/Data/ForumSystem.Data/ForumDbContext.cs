@@ -10,21 +10,26 @@
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ForumDbContext : IdentityDbContext<ForumUser>, IForumDbContext<ForumUser, IdentityRole>
     {
-        public ApplicationDbContext()
+        public ForumDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+            
         }
 
         public IDbSet<Tag> Tags { get; set; }
 
         public IDbSet<Post> Posts { get; set; }
 
-        public static ApplicationDbContext Create()
+        public new IDbSet<TEntity> Set<TEntity>() where TEntity : class
         {
-            return new ApplicationDbContext();
+            return base.Set<TEntity>();
+        }
+
+        public static ForumDbContext Create()
+        {
+            return new ForumDbContext();
         }
 
         public override int SaveChanges()

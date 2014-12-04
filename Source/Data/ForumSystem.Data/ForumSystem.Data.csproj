@@ -53,9 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="ForumDbContext.cs" />
+    <Compile Include="IForumDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DeletableEntityRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForumSystem.Data.Common\ForumSystem.Data.Common.csproj">

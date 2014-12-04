@@ -14,7 +14,7 @@
 
         public string AuthorId { get; set; }
 
-        public virtual ApplicationUser Author { get; set; }
+        public virtual ForumUser Author { get; set; }
  
         public string Content { get; set; }
 
